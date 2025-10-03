@@ -10,7 +10,7 @@ const stage = new Konva.Stage({
 // then create layer
 const layer1 = new Konva.Layer();
 const layer2 = new Konva.Layer();
-const layer3 = new Konva.Layer();
+const testLayer3 = new Konva.Layer();
 
 stage.add(layer1);
 stage.add(layer2);
@@ -22,6 +22,12 @@ const lemonShape = new Konva.Group({
     draggable : true
 })
 
+const lemonShape1 = new Konva.Group({
+    x: stage.width()/2,
+    y: stage.height()/2,
+    fill:'yellow',
+    draggable : true
+})
 // create our shape
 /*
 const circle = new Konva.Circle({
@@ -33,6 +39,30 @@ const circle = new Konva.Circle({
   strokeWidth: 12
 });
 */
+
+const line = new Konva.Line({
+  x: stage.width()/2,
+  y: stage.height()/2,
+  points: [50, 325,10,300,100,340,200,300,150,327],
+  stroke: 'black',
+  strokeWidth: 11,
+  lineCap: 'round',
+  lineJoin: 'round',
+  tension: 0.5
+  //closed:true,
+});
+
+const line2 = new Konva.Line({
+  x: stage.width()/2,
+  y: stage.height()/2,
+  points: [50, 275,10,300,100,260,200,300,150,273],
+  stroke: 'black',
+  strokeWidth: 11,
+  lineCap: 'round',
+  lineJoin: 'round',
+  tension: 0.5
+});
+
 const ellipse = new Konva.Ellipse({
   x: 0,
   y: 0,
@@ -107,8 +137,13 @@ lemonShape.on('pointerover', () => {
 
 lemonShape.on('mouseleave', () => {
     stage.container().style.cursor = 'default'; 
-    anim.stop();
+    anim.stop(),
+    lemonShape.scaleX(1)
+    lemonShape.scaleY(1) 
+
 });
+lemonShape.scale({ x: stage.width()/2, y: stage.height()/2, });
+
 
 arc.rotate(340)
 arc1.rotate(160)
@@ -128,13 +163,17 @@ layer2.add(arc1)
 layer1.add(stroke)
 layer1.add(stroke1)
 */
+
 lemonShape.add(ellipse)
 lemonShape.add(arc)
 lemonShape.add(arc1)
 lemonShape.add(stroke)
 lemonShape.add(stroke1)
 layer1.add(lemonShape)
+
 // add the layer to the stage
+layer1.add(line)
+layer1.add(line2)
 stage.add(layer1);
 
 
